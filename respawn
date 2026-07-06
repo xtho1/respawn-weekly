@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ReSpawn Weekly — Gaming News, Reviews & Giveaways</title>
+<style>
+  :root{
+    --bg:#0f1115;
+    --bg-alt:#161a21;
+    --line:#242a33;
+    --text:#e7e9ee;
+    --text-dim:#9aa2af;
+    --accent:#7CFF6B;
+    --accent-dim:#3f7a3a;
+    --tag:#2a6df0;
+    --font-display:'Space Grotesk', 'Arial Narrow', sans-serif;
+    --font-body:'Inter', -apple-system, sans-serif;
+    --font-mono:'JetBrains Mono', monospace;
+  }
+  @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap');
+
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:var(--font-body);
+    line-height:1.5;
+  }
+  a{color:inherit; text-decoration:none;}
+
+  header{
+    border-bottom:1px solid var(--line);
+    padding:20px 24px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    position:sticky;
+    top:0;
+    background:rgba(15,17,21,0.92);
+    backdrop-filter:blur(6px);
+    z-index:10;
+  }
+  .logo{
+    font-family:var(--font-display);
+    font-weight:700;
+    font-size:1.3rem;
+    letter-spacing:-0.02em;
+    display:flex;
+    align-items:center;
+    gap:8px;
+  }
+  .logo span{color:var(--accent);}
+  nav{display:flex; gap:28px; font-size:0.92rem; color:var(--text-dim);}
+  nav a:hover{color:var(--text);}
+
+  .hero{
+    max-width:1100px;
+    margin:0 auto;
+    padding:64px 24px 48px;
+    display:grid;
+    grid-template-columns:1.3fr 1fr;
+    gap:48px;
+    align-items:center;
+  }
+  .hero-eyebrow{
+    font-family:var(--font-mono);
+    color:var(--accent);
+    font-size:0.8rem;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    margin-bottom:16px;
+  }
+  .hero h1{
+    font-family:var(--font-display);
+    font-size:2.6rem;
+    line-height:1.1;
+    letter-spacing:-0.02em;
+    margin-bottom:18px;
+  }
+  .hero p{
+    color:var(--text-dim);
+    font-size:1.05rem;
+    max-width:46ch;
+  }
+  .hero-panel{
+    background:var(--bg-alt);
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:24px;
+  }
+  .hero-panel h3{
+    font-family:var(--font-mono);
+    font-size:0.85rem;
+    color:var(--text-dim);
+    text-transform:uppercase;
+    letter-spacing:0.06em;
+    margin-bottom:14px;
+  }
+  .live-item{
+    display:flex;
+    justify-content:space-between;
+    padding:10px 0;
+    border-bottom:1px solid var(--line);
+    font-size:0.92rem;
+  }
+  .live-item:last-child{border-bottom:none;}
+  .pill{
+    background:var(--accent-dim);
+    color:var(--accent);
+    font-family:var(--font-mono);
+    font-size:0.72rem;
+    padding:2px 8px;
+    border-radius:100px;
+  }
+
+  section{max-width:1100px; margin:0 auto; padding:48px 24px;}
+  .section-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    margin-bottom:28px;
+    border-bottom:1px solid var(--line);
+    padding-bottom:14px;
+  }
+  .section-head h2{
+    font-family:var(--font-display);
+    font-size:1.5rem;
+    letter-spacing:-0.01em;
+  }
+  .section-head span{
+    font-family:var(--font-mono);
+    color:var(--text-dim);
+    font-size:0.82rem;
+  }
+
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:20px;
+  }
+  .card{
+    background:var(--bg-alt);
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:20px;
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+    transition:border-color 0.15s ease, transform 0.15s ease;
+  }
+  .card:hover{border-color:var(--accent-dim); transform:translateY(-2px);}
+  .card-tag{
+    font-family:var(--font-mono);
+    font-size:0.7rem;
+    color:var(--tag);
+    text-transform:uppercase;
+    letter-spacing:0.06em;
+  }
+  .card h3{font-size:1.05rem; font-weight:600;}
+  .card p{color:var(--text-dim); font-size:0.9rem;}
+  .card-meta{
+    display:flex;
+    justify-content:space-between;
+    color:var(--text-dim);
+    font-size:0.78rem;
+    font-family:var(--font-mono);
+    margin-top:auto;
+    padding-top:10px;
+  }
+
+  .giveaway-strip{
+    background:var(--bg-alt);
+    border:1px solid var(--line);
+    border-radius:10px;
+    overflow:hidden;
+  }
+  .giveaway-row{
+    display:grid;
+    grid-template-columns:2fr 1fr 1fr auto;
+    align-items:center;
+    padding:16px 20px;
+    border-bottom:1px solid var(--line);
+    font-size:0.92rem;
+    gap:12px;
+  }
+  .giveaway-row:last-child{border-bottom:none;}
+  .giveaway-row .g-name{font-weight:600;}
+  .giveaway-row .g-meta{color:var(--text-dim); font-family:var(--font-mono); font-size:0.82rem;}
+  .btn{
+    background:var(--accent);
+    color:#0f1115;
+    font-family:var(--font-mono);
+    font-weight:600;
+    font-size:0.8rem;
+    padding:8px 14px;
+    border-radius:6px;
+    text-align:center;
+    white-space:nowrap;
+  }
+
+  .note{
+    background:var(--bg-alt);
+    border:1px solid var(--line);
+    border-left:3px solid var(--accent);
+    border-radius:6px;
+    padding:18px 20px;
+    color:var(--text-dim);
+    font-size:0.9rem;
+    max-width:1100px;
+    margin:0 auto 48px;
+  }
+  .note strong{color:var(--text);}
+
+  footer{
+    border-top:1px solid var(--line);
+    padding:32px 24px;
+    text-align:center;
+    color:var(--text-dim);
+    font-size:0.85rem;
+  }
+
+  @media(max-width:800px){
+    .hero{grid-template-columns:1fr;}
+    .grid{grid-template-columns:1fr;}
+    .giveaway-row{grid-template-columns:1fr; text-align:left;}
+    nav{display:none;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo"><span>▲</span>ReSpawn Weekly</div>
+  <nav>
+    <a href="#news">News</a>
+    <a href="#reviews">Reviews</a>
+    <a href="#giveaways">Giveaways</a>
+    <a href="#about">About</a>
+  </nav>
+</header>
+
+<div class="hero">
+  <div>
+    <div class="hero-eyebrow">Issue 014 — Weekly Roundup</div>
+    <h1>Everything worth knowing in gaming this week, minus the noise.</h1>
+    <p>News, reviews, and free-to-enter giveaways, curated by people who actually play the games. No clickbait, no fake countdown timers.</p>
+  </div>
+  <div class="hero-panel">
+    <h3>Live This Week</h3>
+    <div class="live-item"><span>Steam Summer Sale ends</span><span class="pill">3 days</span></div>
+    <div class="live-item"><span>New patch — Valor Legends</span><span class="pill">Live</span></div>
+    <div class="live-item"><span>3 giveaways closing soon</span><span class="pill">Ending</span></div>
+  </div>
+</div>
+
+<section id="news">
+  <div class="section-head">
+    <h2>Latest News</h2>
+    <span>Updated weekly</span>
+  </div>
+  <div class="grid">
+    <div class="card">
+      <span class="card-tag">Industry</span>
+      <h3>Mid-year hardware roundup: what's actually worth upgrading for</h3>
+      <p>A practical look at which GPUs and handhelds are worth the money this cycle, and which ones to skip.</p>
+      <div class="card-meta"><span>6 min read</span><span>Editorial</span></div>
+    </div>
+    <div class="card">
+      <span class="card-tag">Updates</span>
+      <h3>Patch notes worth reading: the changes that matter most</h3>
+      <p>We sifted through this week's patch notes across five live-service titles so you don't have to.</p>
+      <div class="card-meta"><span>4 min read</span><span>Editorial</span></div>
+    </div>
+    <div class="card">
+      <span class="card-tag">Community</span>
+      <h3>The indie titles gaining traction this month</h3>
+      <p>Small studios, big ideas — a look at the indie games climbing the charts organically.</p>
+      <div class="card-meta"><span>5 min read</span><span>Editorial</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="reviews">
+  <div class="section-head">
+    <h2>Reviews</h2>
+    <span>Scored honestly</span>
+  </div>
+  <div class="grid">
+    <div class="card">
+      <span class="card-tag">Review · 8.2</span>
+      <h3>A tight, satisfying co-op shooter that respects your time</h3>
+      <p>Short missions, real progression, no pressure to grind. A rare balance done right.</p>
+      <div class="card-meta"><span>Co-op · Shooter</span><span>8 min read</span></div>
+    </div>
+    <div class="card">
+      <span class="card-tag">Review · 7.5</span>
+      <h3>A solid remaster that plays it safe</h3>
+      <p>Improved visuals and quality-of-life fixes, but not much reason to return if you've already finished it once.</p>
+      <div class="card-meta"><span>Remaster</span><span>6 min read</span></div>
+    </div>
+    <div class="card">
+      <span class="card-tag">Review · 9.0</span>
+      <h3>The strategy game genre fans have been waiting for</h3>
+      <p>Deep systems, readable UI, and a campaign that respects the player's intelligence.</p>
+      <div class="card-meta"><span>Strategy</span><span>7 min read</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="giveaways">
+  <div class="section-head">
+    <h2>Current Giveaways</h2>
+    <span>Free to enter</span>
+  </div>
+  <div class="giveaway-strip">
+    <div class="giveaway-row">
+      <span class="g-name">$25 Gift Card — Gamer's Pick</span>
+      <span class="g-meta">Ends in 4 days</span>
+      <span class="g-meta">1,204 entries</span>
+      <span class="btn">Enter</span>
+    </div>
+    <div class="giveaway-row">
+      <span class="g-name">Wireless Controller Bundle</span>
+      <span class="g-meta">Ends in 6 days</span>
+      <span class="g-meta">842 entries</span>
+      <span class="btn">Enter</span>
+    </div>
+    <div class="giveaway-row">
+      <span class="g-name">1-Year Game Pass Subscription</span>
+      <span class="g-meta">Ends in 2 days</span>
+      <span class="g-meta">2,013 entries</span>
+      <span class="btn">Enter</span>
+    </div>
+  </div>
+</section>
+
+<div class="note">
+  <strong>How giveaways work here:</strong> Entries are always free. Some giveaways may ask you to complete a short offer or survey from one of our partners as part of entry — we only list partners we'd use ourselves, and we never charge for entry.
+</div>
+
+<section id="about">
+  <div class="section-head">
+    <h2>About ReSpawn Weekly</h2>
+  </div>
+  <p style="color:var(--text-dim); max-width:60ch;">
+    ReSpawn Weekly is a small, independent gaming publication covering news, reviews, and community giveaways. We're run by a handful of people who play a lot of games and want a weekly roundup that respects your time — no clickbait headlines, no fake urgency, just what's actually worth knowing.
+  </p>
+</section>
+
+<footer>
+  ReSpawn Weekly — Independent gaming coverage, updated weekly.
+</footer>
+
+</body>
+</html>
